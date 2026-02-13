@@ -1,6 +1,8 @@
 CC=gcc
 LDFLAGS=-c
 
+all : main
+
 main : hello.o main.o
 	${CC} $^ -o $@
 
