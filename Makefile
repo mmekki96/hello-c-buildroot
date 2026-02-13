@@ -1,13 +1,13 @@
 CC=gcc
 LDFLAGS=-c
 
-all : main
+all: main
 
-main : hello.o main.o
+main: hello.o main.o
 	${CC} $^ -o $@
 
-%.o : %.c
+%.o: %.c
 	${CC} ${LDFLAGS} $^
 
-clean :
+clean:
 	rm -r *.o main
