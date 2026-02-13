@@ -1,13 +1,10 @@
-CC=gcc
-LDFLAGS=-c
-
 all: main
 
 main: hello.o main.o
 	${CC} $^ -o $@
 
 %.o: %.c
-	${CC} ${LDFLAGS} $^
+	${CC} -c  $^
 
 clean:
 	rm -r *.o main
