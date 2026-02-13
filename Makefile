@@ -1,10 +1,19 @@
+MAJOR=1
+VER=$(MAJOR).0
+LIB=libhello.so
+
 all: main
 
-main: hello.o main.o
-	${CC} $^ -o $@
+main: $(LIB) main.o
+	$(CC) $^ -L$(shell pwd) -lhello -o $@
+
+$(LIB): hello.o
+	$(CC) $< -shared -fPIC -Wl,-soname=$(LIB).$(MAJOR) -o $(LIB).$(VER)
+	ln -s $(LIB).$(VER) $(LIB).$(MAJOR)
+	ln -s $(LIB).$(MAJOR) $(LIB)
 
 %.o: %.c
-	${CC} -c  $^
+	$(CC) -c  $^
 
 clean:
-	rm -r *.o main
+	rm -r *.o *.so* main
